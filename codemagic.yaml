@@ -1,0 +1,31 @@
+workflows:
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      google_play: google_play_integration # Reemplaza con tu integración de Google Play
+    environment:
+      flutter: stable
+      xcode: latest
+      node: latest
+      groups:
+        - google_credentials # Grupo para credenciales de Google
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Flutter analyze
+        script: flutter analyze
+      - name: Flutter test
+        script: flutter test
+      - name: Build APK
+        script: flutter build apk --release
+      - name: Build App Bundle
+        script: flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
+    publishing:
+      email:
+        recipients:
+          - tu@email.com # Reemplaza con tu email
