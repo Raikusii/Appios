@@ -28,3 +28,32 @@ workflows:
       email:
         recipients:
           - tu@email.com # Reemplaza con tu email
+
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    
+    environment:
+      flutter: stable
+      xcode: latest
+      node: latest
+      groups:
+        - apple_credentials # Grupo para credenciales de Apple
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Flutter analyze
+        script: flutter analyze
+      - name: Flutter test
+        script: flutter test
+      - name: Build iOS
+        script: flutter build ios --release --no-codesign
+      - name: Build IPA
+        script: flutter build ipa --release
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - tu@email.com # Reemplaza con tu email
