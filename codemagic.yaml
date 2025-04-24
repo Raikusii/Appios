@@ -12,18 +12,28 @@ workflows:
         - google_credentials # Grupo para credenciales de Google
     scripts:
       - name: Get Flutter packages
-        script: flutter pub get
+        script: |
+          cd flutter_application_taskapp
+          flutter pub get
       - name: Flutter analyze
-        script: flutter analyze
+        script: |
+          cd flutter_application_taskapp
+          flutter analyze
       - name: Flutter test
-        script: flutter test
+        script: |
+          cd flutter_application_taskapp
+          flutter test
       - name: Build APK
-        script: flutter build apk --release
+        script: |
+          cd flutter_application_taskapp
+          flutter build apk --release
       - name: Build App Bundle
-        script: flutter build appbundle --release
+        script: |
+          cd flutter_application_taskapp
+          flutter build appbundle --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-      - build/app/outputs/bundle/release/app-release.aab
+      - flutter_application_taskapp/build/app/outputs/flutter-apk/app-release.apk
+      - flutter_application_taskapp/build/app/outputs/bundle/release/app-release.aab
     publishing:
       email:
         recipients:
@@ -42,17 +52,27 @@ workflows:
         - apple_credentials # Grupo para credenciales de Apple
     scripts:
       - name: Get Flutter packages
-        script: flutter pub get
+        script: |
+          cd flutter_application_taskapp
+          flutter pub get
       - name: Flutter analyze
-        script: flutter analyze
+        script: |
+          cd flutter_application_taskapp
+          flutter analyze
       - name: Flutter test
-        script: flutter test
+        script: |
+          cd flutter_application_taskapp
+          flutter test
       - name: Build iOS
-        script: flutter build ios --release --no-codesign
+        script: |
+          cd flutter_application_taskapp
+          flutter build ios --release --no-codesign
       - name: Build IPA
-        script: flutter build ipa --release
+        script: |
+          cd flutter_application_taskapp
+          flutter build ipa --release
     artifacts:
-      - build/ios/ipa/*.ipa
+      - flutter_application_taskapp/build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
